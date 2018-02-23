@@ -12,18 +12,18 @@ db = client.mars_scrape
 
 collection = db.mars_scrape
 
-# scrape function
-from scrape_mars import scrape
+# Import scrape function
+from scrape_mars import Scrape
 
 @app.route("/")
 def home():
-    scrape_dict = collection.find_one()
+    scrape_dict = db.collection.find_one()
     return render_template("index.html", dict=scrape_dict)
 
 @app.route("/scrape")
 def reload():
     mars_dict = scrape()
-    collection.update({"id": 1}, {"$set": mars_dict}, upsert = True)
+    db.collection.update({"id": 1}, {"$set": mars_dict}, upsert = True)
     return redirect("http://localhost:5000/", code=302)
 
 if __name__ == '__main__':
