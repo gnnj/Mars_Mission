@@ -33,7 +33,7 @@ def Scrape():
 
     # Go to link
     browser.click_link_by_partial_text('FULL IMAGE')
-
+    time.sleep(30)
     browser.click_link_by_partial_text('more info')
 
     # Get HTML
@@ -197,4 +197,4 @@ def Scrape():
     print("----------------------------------")
     print("SCRAPING COMPLETED")
 
-    return mars_dict
+    return scrape_dict
