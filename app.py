@@ -23,7 +23,8 @@ def home():
 @app.route("/scrape")
 def reload():
     mars_dict = Scrape()
-    db.collection.update({"id": 1}, {"$set": scrape_dict}, upsert = True)
+    print(mars_dict)
+    db.collection.update({"id": 1}, {"$set": mars_dict}, upsert = True)
     return redirect("http://localhost:5000/", code=302)
 
 if __name__ == '__main__':

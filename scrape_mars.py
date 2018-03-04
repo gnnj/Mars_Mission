@@ -86,8 +86,6 @@ def Scrape():
         "Values": values
     })
 
-    mars_facts_df
-
     # Get the HTML code for the Data Frame
     fact_table = mars_facts_df.to_html(header = False, index = False)
     fact_table
@@ -197,4 +195,7 @@ def Scrape():
     print("----------------------------------")
     print("SCRAPING COMPLETED")
 
-    return scrape_dict
+    # Convert to Dictonary using Pandas
+    mars_facts_df = mars_facts_df.to_dict()
+
+    return mars_facts_df
