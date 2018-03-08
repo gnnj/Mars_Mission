@@ -1,91 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mission to Mars</title>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="../static/assets.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link  rel="icon" src='/statics/images/icon.png'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
+<!-- STYLE-->
+<style>
+*{
+    box-sizing: border-box;
+}
+.div_box {
+    width: 100%;
+    padding: 10px;
+    border: 5px #EEEEEE;
+    margin: 0; 
+    margin-bottom: 20px;
+}
+.jumbotron {
+    margin-bottom: 0px;
+    background-image: url('/statics/images/banner1.jpg');
+    background-position: 0% 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 50%;
+    color: white;
+    text-shadow: black 0.3em 0.3em 0.3em;
+}
+.boxh{
+  margin-bottom: 20px;
+  margin-right: 0px;
+  /*border:1px solid gray;*/
+}
+body {
+    margin: 0;
+    font-family: Arial;
+   padding-bottom: 40px;
+   color: #5a5a5a;
+}
+.header {
+    text-align: center;
+    padding: 32px;
+}
+.facts {
+    background-color: lightgrey;
+    width: 300px;
+    /*border: 25px solid green;*/
+    padding: 25px;
+    margin: 25px;
+}
+/* Create four equal columns that sits next to each other */
+.column {
+    -ms-flex: 25%; /* IE10 */
+    flex: 25%;
+    max-width: 100%;
+    max-height:100%;
+    padding: 0 4px;
+}
+.column img {
+    margin-top: 8px;
+    vertical-align: middle;
+}
+.feature_img{
+  max-width:100%;
+  max-height:100%;
+}
+ .headline1 {
+      background-image: url(/static/images/banner1.jpg);
+      background-repeat: no-repeat;
+      background-position: left top;
+      padding-top:68px;
+      margin-bottom:50px;
+   }
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media (max-width: 800px) {
+    .column {
+        -ms-flex: 50%;
+        flex: 50%;
+        max-width: 50%;
+    }
+}
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+    .column {
+        -ms-flex: 100%;
+        flex: 100%;
+        max-width: 100%;
+    }
+}
+</style>
+<!-- style end-->
+
+<!-- Body Starts-->
 <body>
-    <header>
-        <div class="text-center">
-            <h1><a href="/" class="mission">Mission to Mars</a></h1>
-            <a href="/scrape" class="btn btn-primary" role="button">Scrape</a>
-        </div>
-    </header>
-
-    <!-- Mars News -->
-    <div class="container" style="width:100%">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Latest Mars News</h2>
-                <h3>{{mars_scrape.news_title }}</h3>
-                <p>{{mars_scrape.news_p }}</p>
-            </div>
-        </div>
+  <div class="container-fluid">
+    <!-- div for first box-->
+    <div class="jumbotron text-center headline1">
+      <h1 class="header">Mission to Mars</h1>
+      
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
     </div>
-
-    <!-- Mars Image / Current Weather / Facts -->
-    <div class="row">
-        <div class="col-md-8">
-            <div class="panel">
-                <div class="panel-body">
-                    <h2>Featured Mars Image</h2>
-                    <img src=  {{mars_scrape.featured_image_url }} alt="" class="featured">
-                </div>
-            </div>
+    <!-- div for 3 news -->
+    <div class="container  marketing">
+      <div class="row" >
+        <h1 class="header">Latest Mars News</h1>
+          <div >
+            {% for each in listings %}
+        
+            <img class="img-circle " src={{each.img_link}} alt="Generic placeholder image" width="140" height="140">          
+            <h3>{{each.News_Title}}</h3>
+            <p>{{each.News_Paragraph}}</p>
+            <p><a class="btn btn-default" href={{each.details_a}} role="button">View details &raquo;</a></p>
+            {% endfor %}
+        
+          </div>
+      </div><!-- close news-->
+      <!-- div for image facts and weather row-->
+      <div class="row div_box">
+        <div class="col-md-7"><!-- image-->
+          <h2 class="header">Featured Mars Image</h2>
+          <img src={{listings.Most_Recent_Mars_Image}} class="feature_img">
         </div>
-        <div class="col-md-3">
-            <div class="panel border">
-                <div class="panel-body">
-                    <h2>Current Weather on Mars</h2>
-                    <p>{{mars_scrape.mars_weather }}</p>
-                </div>
-            </div>
-            <div class="panel">
-                <div class="panel-body">
-                    <h2>Mars Facts</h2>
-                    {{mars_scrape.profile_html|safe }}
-                </div>
-            </div>
-        </div>
-        <div class="col-md-1"></div>
-    </div>
-
-    <!-- Hemispheres -->
-    <h2 class="hemispheres">Mars Hemispheres</h2>
-    <div class="row" style="padding-bottom:20px">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-5 border">
-            <img src={{mars_scrape.hemisphere_image_urls[0]["img_url"] }} alt="" style="width:100%">
-            <p class="caption">{{mars_scrape.hemisphere_image_urls[0]["title"] }}</p>
-        </div>
-        <div class="col-sm-5 border" >
-            <img src={{mars_scrape.hemisphere_image_urls[1]["img_url"] }} alt="" style="width:100%">
-            <p class="caption">{{mars_scrape.hemisphere_image_urls[1]["title"] }}</p>
-        </div>
-        <div class="col-sm-1"></div>
-    </div>
-    <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-5 border" >
-            <img src={{mars_scrape.hemisphere_image_urls[2]["img_url"] }} alt="" style="width:100%">
-            <p class="caption">{{mars_scrape.hemisphere_image_urls[2]["title"] }}</p>
-        </div>
-        <div class="col-sm-5 border" >
-            <img src={{mars_scrape.hemisphere_image_urls[3]["img_url"] }} alt="" style="width:100%">
-            <p class="caption">{{mars_scrape.hemisphere_image_urls[3]["title"] }}</p>
-        </div>
-        <div class="col-sm-1"></div>
-    </div>
-
-</body>
-</html>
+        <div class="col-md-5 box "><!-- facts and weathe-->
+          <div class="facts">
+            <h3 class="header">Current Weather Data</h3>
+            <h4 class="heading" class="facts">{{listings.MarsWeather}}</h4>
+          </div>
+        <div class="col-md-5"><!-- FACTS-->
+          <h3>Mars Facts</h3>
+              {{listings.facts |safe}}
+        </div> 
+      </div>
+    </div> <!-- close image facts and weather div-->
+    <!-- hemispheres-->
+    <h2 class="header">Mars Hemispheres</h2>
+    <div class="row div_box">
+      {% for h in listings.Mars_URL %}
+      <div class="col-sm-6 boxh">
+        <img src={{h.Image_Url}} class="feature_img">
+        <em class="header">{{h.Title}}</em>
+      </div>
+      {% endfor %}
+    </div><!-- close hemisphere image-->
+  </div><!-- close the main body div -->
+</body><!-- close body-->
+</html><!-- close html -->
