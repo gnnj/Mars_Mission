@@ -109,13 +109,9 @@ body {
       <div class="row" >
         <h1 class="header">Latest Mars News</h1>
           <div >
-            {% for each in listings %}
-        
-            <img class="img-circle " src={{each.img_link}} alt="Generic placeholder image" width="140" height="140">          
-            <h3>{{each.News_Title}}</h3>
-            <p>{{each.News_Paragraph}}</p>
-            <p><a class="btn btn-default" href={{each.details_a}} role="button">View details &raquo;</a></p>
-            {% endfor %}
+
+            <h3>{{listings.News_Title}}</h3>
+            <p>{{listings.News_Paragraph}}</p>
         
           </div>
       </div><!-- close news-->
@@ -147,5 +143,9 @@ body {
       {% endfor %}
     </div><!-- close hemisphere image-->
   </div><!-- close the main body div -->
+  <script>
+    var data = "{{listings}}";
+    console.log(data)
+  </script>
 </body><!-- close body-->
 </html><!-- close html -->
